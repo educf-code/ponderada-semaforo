@@ -1,5 +1,7 @@
 # Montagem física
-&nbsp;&nbsp;&nbsp;&nbsp; Abaixo, segue a imagem da montagem física do arduíno em que é feito o controle do semáforo. Dentro da pasta "assets" existe um arquivo de nome "video-semaforo.mp4" que mostra a execução do semáforo em vídeo.
+&nbsp;&nbsp;&nbsp;&nbsp; Abaixo, segue a imagem da montagem física do arduíno em que é feito o controle do semáforo.
+
+<video controls src="assets/video-semaforo.mp4" title="Title"></video>
 
 <img src="assets/foto-semaforo.jpg">
 
@@ -15,15 +17,61 @@
 | Resistores     | 3          | 330ohm  |
 | Protoboard     | 1          | 400 pontos        |
 | Jumpers   | 10        | Fios conectores |
+| Chave Gangorra KCD11-101| 1        | Interruptor
+
+# Código
+
+``` int green = 8;      // Define o pino do LED verde
+int yellow = 9;     // Define o pino do LED amarelo
+int red = 10;       // Define o pino do LED vermelho
+
+void setup() {
+  pinMode(red, OUTPUT);    // Configura o LED vermelho como saída
+  pinMode(yellow, OUTPUT); // Configura o LED amarelo como saída
+  pinMode(green, OUTPUT);  // Configura o LED verde como saída
+}
+
+void loop() {
+  digitalWrite(red, HIGH);      // Acende o LED vermelho
+  delay(6000);                  // Aguarda 6 segundos
+  
+  digitalWrite(yellow, HIGH);   // Troca para amarelo
+  delay(2000);                  // Aguarda 2 segundos
+
+  digitalWrite(green, HIGH);    // Troca para verde
+  delay(2000);                  // Aguarda 2 segundos
+  
+  for (int i = 0; i < 3; i++) { // Pisca o LED verde 3 vezes
+    digitalWrite(green, LOW);
+    delay(500);
+    digitalWrite(green, HIGH);
+    delay(500);
+  }
+
+  digitalWrite(yellow, HIGH);   // Volta para amarelo
+  delay(2000);                  // Aguarda 2 segundos
+} 
+```
+
 
 # Avaliação em Pares
 
-### Avaliador: Nome do Avaliador
+#### Avaliador: Lucas Paiva Brasil
 
 | Critério                                                                                                 | Contempla (Pontos) | Contempla Parcialmente (Pontos) | Não Contempla (Pontos) | Observações do Avaliador |
 |---------------------------------------------------------------------------------------------------------|--------------------|----------------------------------|--------------------------|---------------------------|
-| Montagem física com cores corretas, boa disposição dos fios e uso adequado de resistores                | Até 3              | Até 1,5                            | 0                        |                           |
-| Temporização adequada conforme tempos medidos com auxílio de algum instrumento externo                  | Até 3              | Até 1,5                          | 0                        |                           |
-| Código implementa corretamente as fases do semáforo e estrutura do código (variáveis representativas e comentários) | Até 3              | Até 1,5                          | 0                        |                           |
-| Extra: Implmeentou um componente de liga/desliga no semáforo e/ou usou ponteiros no código | Até 1              |  Até 0,5                         | 0                        |                           |
-|  |                                                             |  | |**Pontuação Total**|
+| Montagem física com cores corretas, boa disposição dos fios e uso adequado de resistores                | 2,5             |                       |                      |                       A montagem do circuito está correta, mas acredito que as cores dos jumpers poderiam ser mais representativas.    |
+| Temporização adequada conforme tempos medidos com auxílio de algum instrumento externo                  | 3              |                          |                        | Temporização correta de acordo com o que foi proposto.                          |
+| Código implementa corretamente as fases do semáforo e estrutura do código (variáveis representativas e comentários) |    3        |                          |                        |  Código escrito da maneira correta, as variáveis são explicativas e o código é legível.                       |
+| Extra: Implementou um componente de liga/desliga no semáforo e/ou usou ponteiros no código | 1           |                         |                        |                       Preferiu pelo uso de botões e os implementou da maneira correta e funcional    |
+|  |                                                             |  | |*Pontuação Total*  9,5|
+
+#### Avaliador: Caio Alcântara
+
+| Critério                                                                                                 | Contempla (Pontos) | Contempla Parcialmente (Pontos) | Não Contempla (Pontos) | Observações do Avaliador |
+|---------------------------------------------------------------------------------------------------------|--------------------|----------------------------------|--------------------------|---------------------------|
+| Poderia ter usado cores melhores, como o preto para o negativo, por exemplo.              | 2             |                       |                      |                       A montagem do circuito está correta, mas acredito que as cores dos jumpers poderiam ser mais representativas.    |
+| Temporização adequada conforme tempos medidos com auxílio de algum instrumento externo                  | 3              |                          |                        | Os tempos estão corretos.                          |
+| Código implementa corretamente as fases do semáforo e estrutura do código (variáveis representativas e comentários) |    3        |                          |                        |  Código está correto, principalmente no uso do loop para aumentar a escalabilidade.                    |
+| Extra: Implementou um componente de liga/desliga no semáforo e/ou usou ponteiros no código | 1           |                         |                        |                       O interruptor foi uma boa e criativa solução.   |
+|  |                                                             |  | |**Pontuação Total**  9|
